@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richa & Abhishek - Wedding Invitation</title>
+    <meta name="description" content="Wedding invitation of Richa Patil & Abhishek Mankare on 26th November 2026. Join us in our celebration!">
+    
+    <!-- Google Fonts for Elegant Wedding Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Falling Petals Canvas Background -->
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- Background Audio -->
+    <audio id="bg-audio" loop>
+        <source src="audio/background.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Audio Control Button -->
+    <button id="music-btn" class="music-btn hidden" aria-label="Toggle Music">
+        <div class="music-disc">
+            <i class="fa-solid fa-music"></i>
+        </div>
+    </button>
+
+    <!-- SCREEN 1: Interactive Envelope Screen -->
+    <div id="envelope-screen" class="envelope-screen">
+        <div class="envelope-container">
+            <!-- Falling Petals in Envelope View -->
+            <div class="envelope-wrapper">
+                <div class="envelope">
+                    <!-- Envelope Flap (Top) -->
+                    <div class="envelope-flap"></div>
+                    
+                    <!-- Envelope Paper Inside -->
+                    <div class="envelope-paper">
+                        <img src="assets/ganesh-idol-TubyYjSJ.png" alt="Ganesh Idol" class="paper-ganesha">
+                        <h2 class="paper-heading">Wedding Invitation</h2>
+                        <p class="paper-names">Richa & Abhishek</p>
+                        <p class="paper-date">26.11.2026</p>
+                        <button id="open-btn" class="open-btn">Open Scroll</button>
+                    </div>
+
+                    <!-- Envelope Front Left & Right flaps (decorative overlay) -->
+                    <div class="envelope-front">
+                        <div class="floral-pattern-left"></div>
+                        <div class="floral-pattern-right"></div>
+                    </div>
+
+                    <!-- Wax Seal (Clickable to start the animation) -->
+                    <div id="wax-seal" class="wax-seal">
+                        <div class="seal-inner">
+                            <span class="seal-letters">R & A</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="envelope-hint">Tap on the wax seal to open</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: Main Invitation Scroll -->
+    <div id="invitation-screen" class="invitation-screen hidden">
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg" style="background-image: url('assets/wedding-hero-BBfn2Y6k.jpg');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <img src="assets/ganesh-idol-TubyYjSJ.png" alt="Ganesh Idol" class="ganesha-logo fade-in-up">
+                <p class="ganesha-text fade-in-up">|| Shri Ganeshay Namah ||</p>
+                
+                <h1 class="wedding-title fade-in-up">Save The Date</h1>
+                
+                <div class="couple-names-wrapper fade-in-up">
+                    <h2 class="name-bride">Richa</h2>
+                    <span class="name-connector">and</span>
+                    <h2 class="name-groom">Abhishek</h2>
+                </div>
+                
+                <p class="wedding-date-hero fade-in-up">Thursday, 26 November 2026</p>
+                <div class="scroll-indicator fade-in-up">
+                    <p>Scroll Down</p>
+                    <i class="fa-solid fa-chevron-down bounce"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Timer Section -->
+        <section class="countdown-section">
+            <div class="section-container">
+                <h3 class="section-subtitle">The Countdown Begins</h3>
+                <h2 class="section-title">We are waiting for the Day!</h2>
+                <div class="divider">✦</div>
+                
+                <div id="countdown-timer" class="countdown-timer">
+                    <div class="countdown-item">
+                        <span id="days" class="countdown-number">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours" class="countdown-number">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes" class="countdown-number">00</span>
+                        <span class="countdown-label">Mins</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds" class="countdown-number">00</span>
+                        <span class="countdown-label">Secs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Schedule Section -->
+        <section class="events-section">
+            <div class="section-container">
+                <h3 class="section-subtitle">Events Schedule</h3>
+                <h2 class="section-title">The Celebration</h2>
+                <div class="divider">✦</div>
+
+                <div class="events-grid">
+                    
+                    <!-- Event 1: Haldi -->
+                    <div class="event-card fade-in-scroll" style="background-image: url('assets/bg-haldi-new-BPoFOaPt.jpg');">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="event-icon">🌼</span>
+                            <h3 class="event-title">Haldi</h3>
+                            <p class="event-desc">A joyful celebration filled with turmeric, laughter, and blessings.</p>
+                            <div class="event-meta">
+                                <span class="event-day">Wed</span>
+                                <span class="event-date">25th Nov 2026</span>
+                                <span class="event-time">4:00 PM onwards</span>
+                            </div>
+                            <img src="assets/couple_haldi.png" alt="Haldi Illustration" class="couple-illustration">
+                        </div>
+                    </div>
+
+                    <!-- Event 2: Sangeet -->
+                    <div class="event-card fade-in-scroll" style="background-image: url('assets/bg-sangeet-new-CNNXHaSd.jpg');">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="event-icon">💃</span>
+                            <h3 class="event-title">Sangeet</h3>
+                            <p class="event-desc">An evening of dynamic dance, melodious music, and celebration.</p>
+                            <div class="event-meta">
+                                <span class="event-day">Wed</span>
+                                <span class="event-date">25th Nov 2026</span>
+                                <span class="event-time">7:00 PM onwards</span>
+                            </div>
+                            <img src="assets/couple_sangeet.png" alt="Sangeet Illustration" class="couple-illustration">
+                        </div>
+                    </div>
+
+                    <!-- Event 3: Vidhi -->
+                    <div class="event-card fade-in-scroll" style="background-image: url('assets/bg-sapthapadi-new-DwAlBfyG.jpg');">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="event-icon">🛕</span>
+                            <h3 class="event-title">Vidhi</h3>
+                            <p class="event-desc">The sacred wedding rituals, vows, and spiritual blessings.</p>
+                            <div class="event-meta">
+                                <span class="event-day">Thu</span>
+                                <span class="event-date">26th Nov 2026</span>
+                                <span class="event-time">9:00 AM onwards</span>
+                            </div>
+                            <img src="assets/couple_vidhi.png" alt="Vidhi Illustration" class="couple-illustration">
+                        </div>
+                    </div>
+
+                    <!-- Event 4: Varmala -->
+                    <div class="event-card fade-in-scroll" style="background-image: url('assets/bg-varmala-new-CDPQmalT.jpg');">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="event-icon">💍</span>
+                            <h3 class="event-title">Varmala</h3>
+                            <p class="event-desc">The exchange of garlands and the beautiful union of two souls.</p>
+                            <div class="event-meta">
+                                <span class="event-day">Thu</span>
+                                <span class="event-date">26th Nov 2026</span>
+                                <span class="event-time">12:00 PM</span>
+                            </div>
+                            <img src="assets/couple_varmala.png" alt="Varmala Illustration" class="couple-illustration">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Invitation Presence Section -->
+        <section class="presence-section">
+            <div class="section-container">
+                <h3 class="presence-message">Awaiting Your Polite Presence</h3>
+                <div class="divider">✦</div>
+            </div>
+        </section>
+
+        <!-- Families Section -->
+        <section class="families-section">
+            <div class="section-container">
+                <h2 class="section-title">The Families</h2>
+                <div class="divider">✦</div>
+                
+                <div class="families-grid">
+                    <div class="family-side">
+                        <h3 class="family-name">Bride's Family</h3>
+                        <p class="family-member">D/o Mr. Sangram Patil</p>
+                        <p class="family-member">& Mrs. Rekha Patil</p>
+                    </div>
+                    
+                    <div class="family-side">
+                        <h3 class="family-name">Groom's Family</h3>
+                        <p class="family-member">S/o Mr. Vijaykumar Mankare</p>
+                        <p class="family-member">& Mrs. Usha Mankare</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP & Couple Section -->
+        <section class="rsvp-section">
+            <div class="section-container">
+                
+                <!-- Ghibli-Style Couple Photo Frame -->
+                <div class="couple-photo-frame fade-in-scroll">
+                    <img src="assets/couple_ghibli.png" alt="Richa & Abhishek" class="couple-photo-image">
+                    <div class="frame-decor top-left"></div>
+                    <div class="frame-decor top-right"></div>
+                    <div class="frame-decor bottom-left"></div>
+                    <div class="frame-decor bottom-right"></div>
+                </div>
+
+                <h2 class="section-title">Location & RSVP</h2>
+                <div class="divider">✦</div>
+
+                <div class="rsvp-details">
+                    <div class="location-card">
+                        <i class="fa-solid fa-location-dot location-icon"></i>
+                        <h3>Venue Details</h3>
+                        <p class="venue-name">Upper Deck, Lonavala</p>
+                        <p class="venue-address">Lonavala, Maharashtra, India</p>
+                        <a href="https://maps.app.goo.gl/HZU4aLddeYxjjAJJ7" target="_blank" rel="noopener" class="navigate-btn">
+                            <i class="fa-solid fa-map-location-dot"></i> Click to Navigate
+                        </a>
+                    </div>
+
+                    <div class="rsvp-card">
+                        <i class="fa-solid fa-envelope-open-text rsvp-icon"></i>
+                        <h3>RSVP Contact</h3>
+                        <p class="rsvp-phone">Please confirm your presence:</p>
+                        <a href="tel:9011311818" class="phone-link">
+                            <i class="fa-solid fa-phone"></i> +91 9011311818
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer-section">
+            <div class="footer-content">
+                <h2 class="footer-logo">Richa & Abhishek</h2>
+                <p class="footer-text">We request the pleasure of your company to share in our joy as we begin our new life together.</p>
+                <div class="footer-divider">✦</div>
+                <p class="footer-credits">Made with Love | English Only</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
