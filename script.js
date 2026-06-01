@@ -262,4 +262,123 @@ document.addEventListener("DOMContentLoaded", () => {
     // Start animation loop
     animatePetals();
 
+    /* ==========================================================================
+       5. INTERACTIVE SCRATCH CARD FOR WEDDING DATE
+       ========================================================================== */
+    const scratchCanvas = document.getElementById("scratch-canvas");
+    if (scratchCanvas) {
+        const sCtx = scratchCanvas.getContext("2d");
+        const sWidth = scratchCanvas.width;
+        const sHeight = scratchCanvas.height;
+        let isDrawing = false;
+
+        // Draw Scratch Foil (Gold Foil with Elegant stripes and text)
+        const drawFoil = () => {
+            // Gold Linear Gradient
+            const grad = sCtx.createLinearGradient(0, 0, sWidth, sHeight);
+            grad.addColorStop(0, '#b89047');
+            grad.addColorStop(0.3, '#d4af37');
+            grad.addColorStop(0.5, '#f3e5ab');
+            grad.addColorStop(0.7, '#d4af37');
+            grad.addColorStop(1, '#b89047');
+            
+            sCtx.fillStyle = grad;
+            sCtx.fillRect(0, 0, sWidth, sHeight);
+
+            // Subtle gold diagonal pattern stripes
+            sCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            sCtx.lineWidth = 2;
+            for (let i = -sWidth; i < sWidth; i += 15) {
+                sCtx.beginPath();
+                sCtx.moveTo(i, 0);
+                sCtx.lineTo(i + sHeight, sHeight);
+                sCtx.stroke();
+            }
+
+            // Elegant Outer gold border line
+            sCtx.strokeStyle = 'rgba(184, 144, 71, 0.5)';
+            sCtx.lineWidth = 4;
+            sCtx.strokeRect(0, 0, sWidth, sHeight);
+
+            // Scratch instruction text
+            sCtx.fillStyle = '#2d312e';
+            sCtx.font = "italic 600 15px 'Playfair Display', serif";
+            sCtx.textAlign = "center";
+            sCtx.textBaseline = "middle";
+            sCtx.fillText("✦ Scratch to Reveal Date ✦", sWidth / 2, sHeight / 2);
+        };
+
+        drawFoil();
+
+        // Get relative coordinates for mouse/touch
+        const getMousePos = (e) => {
+            const rect = scratchCanvas.getBoundingClientRect();
+            // Supports both touch and mouse
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        };
+
+        // Scratch/Erase painting function
+        const scratch = (pos) => {
+            sCtx.globalCompositeOperation = 'destination-out';
+            sCtx.beginPath();
+            sCtx.arc(pos.x, pos.y, 16, 0, Math.PI * 2); // 16px radius eraser brush
+            sCtx.fill();
+        };
+
+        // Event listener functions
+        const startScratch = (e) => {
+            isDrawing = true;
+            scratch(getMousePos(e));
+        };
+
+        const drawScratch = (e) => {
+            if (!isDrawing) return;
+            e.preventDefault(); // Stop page scroll while scratching
+            scratch(getMousePos(e));
+        };
+
+        const stopScratch = () => {
+            if (!isDrawing) return;
+            isDrawing = false;
+            checkScratchedPercentage();
+        };
+
+        // Add event listeners
+        scratchCanvas.addEventListener("mousedown", startScratch);
+        scratchCanvas.addEventListener("mousemove", drawScratch);
+        window.addEventListener("mouseup", stopScratch);
+
+        scratchCanvas.addEventListener("touchstart", startScratch, { passive: false });
+        scratchCanvas.addEventListener("touchmove", drawScratch, { passive: false });
+        window.addEventListener("touchend", stopScratch);
+
+        // Check percentage of card that is scratched off
+        const checkScratchedPercentage = () => {
+            const imgData = sCtx.getImageData(0, 0, sWidth, sHeight);
+            const pixels = imgData.data;
+            let clearCount = 0;
+            
+            // Loop through alpha values (every 4th element)
+            for (let i = 3; i < pixels.length; i += 4) {
+                if (pixels[i] === 0) {
+                    clearCount++;
+                }
+            }
+            
+            const percentage = clearCount / (pixels.length / 4);
+            // If more than 40% cleared, fade out the canvas to fully reveal
+            if (percentage > 0.40) {
+                scratchCanvas.style.opacity = "0";
+                setTimeout(() => {
+                    scratchCanvas.style.display = "none";
+                }, 800);
+            }
+        };
+    }
+
 });

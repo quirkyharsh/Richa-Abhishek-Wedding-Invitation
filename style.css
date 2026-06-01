@@ -1216,3 +1216,53 @@ html, body {
 .hero-content .fade-in-up:nth-child(4) { transition-delay: 0.8s; }
 .hero-content .fade-in-up:nth-child(5) { transition-delay: 1.0s; }
 .hero-content .fade-in-up:nth-child(6) { transition-delay: 1.2s; }
+
+/* ==========================================================================
+   INTERACTIVE SCRATCH CARD
+   ========================================================================== */
+.scratch-card-container {
+    position: relative;
+    width: 320px;
+    height: 80px;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--color-gold-medium);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    touch-action: none; /* Disable default scrolling on mobile when scratching */
+}
+
+.scratch-reveal-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-gold-light);
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.35);
+    user-select: none;
+}
+
+#scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    cursor: grab;
+    transition: opacity 0.8s ease;
+}
+
+#scratch-canvas:active {
+    cursor: grabbing;
+}
